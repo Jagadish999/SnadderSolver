@@ -1,75 +1,72 @@
-let totalNumberOfMoves = 11;
+let totalNumberOfMoves = 7;
 
-const moves = [0, 2, 0, 5, 5, 1];
+const moves = [3, 1, 1, 4, 1, 1];
+
 const snakes = [
     {
         id: 1,
-        from: 27,
-        to: 6
+        from: 59,
+        to: 16
     },
 
     {
         id: 2,
-        from: 48,
-        to: 29
+        from: 71,
+        to: 28
     },
 
     {
         id: 3,
-        from: 71,
-        to: 32
+        from: 64,
+        to: 48
     },
     {
         id: 4,
-        from: 76,
-        to: 67
+        from: 77,
+        to: 57
     },
     {
         id: 5,
         from: 84,
-        to: 78
+        to: 62
     },
     {
         id: 6,
-        from: 81,
-        to: 42
-    },
-    {
-        id: 6,
-        from: 96,
-        to: 90
+        from: 88,
+        to: 53
     },
 ];
+
 const ladder = [
     {
         id: 1,
         from: 3,
-        to: 44,
+        to: 11,
     },
     {
         id: 2,
-        from: 12,
-        to: 46,
+        from: 22,
+        to: 32,
     },
     {
         id: 3,
-        from: 14,
-        to: 57,
+        from: 43,
+        to: 82,
     },
     {
         id: 4,
-        from: 22,
-        to: 61,
+        from: 5,
+        to: 35,
     },
     {
         id: 5,
-        from: 34,
-        to: 70,
+        from: 55,
+        to: 94,
     },
     {
         id: 6,
-        from: 74,
-        to: 99,
+        from: 66,
+        to: 90,
     }
 ];
 
@@ -87,35 +84,33 @@ class SnadderSolver {
         this.moveIdx = moveIdx;
     }
 
-    updateCurrrentMove(){
+    updateCurrrentMove() {
         this.currentSq += this.currentMove;
         this.totalNumberOfMoves--;
         this.moves[this.moveIdx]--;
         this.allMoves += this.currentMove + " ";
-        console.log(this.allMoves);
     }
 
-    updateLadderSnake(){
+    updateLadderSnake() {
         const snakeBite = this.snakes.find((element) => element.from === this.currentSq);
 
-        if(snakeBite) this.currentSq = snakeBite.to;
+        if (snakeBite) this.currentSq = snakeBite.to;
 
         const ladderClimb = this.ladder.find((element) => element.from === this.currentSq);
 
-        if(ladderClimb) this.currentSq = ladderClimb.to;
+        if (ladderClimb) this.currentSq = ladderClimb.to;
     }
 
-    checkDestination(){
-
+    checkDestination() {
         return this.currentSq === 100;
     }
 
-    nextContinuable(){
+    nextContinuable() {
         return this.totalNumberOfMoves !== 0;
     }
 
-    getMessage(){
-        console.log(`You currently played move ${this.moves[this.moveIdx] + 1}`);
+    getMessage() {
+        console.log(`You currently played move ${this.moveIdx + 1}`);
         console.log(`You are currently in ${this.currentSq}`);
         console.log(`Moves left ${this.totalNumberOfMoves}`);
         console.log(this.allMoves);
@@ -124,31 +119,31 @@ class SnadderSolver {
 
 function main(currentSq, totalNumberOfMoves, moves, snakes, ladder, allMvs) {
 
-    for(let i = 0; i < moves.length; i++){
+    for (let i = 0; i < moves.length; i++) {
 
-        if(moves[i] != 0){
-            const snadderSolverObj = new SnadderSolver(currentSq, totalNumberOfMoves, moves, snakes, ladder, i+1, allMvs, i);
+        if (moves[i] != 0) {
+            const snadderSolverObj = new SnadderSolver(currentSq, totalNumberOfMoves, moves, snakes, ladder, i + 1, allMvs, i);
 
             snadderSolverObj.updateCurrrentMove();
             snadderSolverObj.updateLadderSnake();
 
             const checkDestination = snadderSolverObj.checkDestination();
             const nextToContinue = snadderSolverObj.nextContinuable();
-            
-            if(checkDestination){
+
+            if (checkDestination) {
                 snadderSolverObj.getMessage();
                 return snadderSolverObj.allMoves;
             }
-            else if(nextToContinue){
+            else if (nextToContinue) {
                 const msg = main(snadderSolverObj.currentSq, snadderSolverObj.totalNumberOfMoves, snadderSolverObj.moves, snakes, ladder, snadderSolverObj.allMoves);
 
-                if(msg) return msg;
+                if (msg) return msg;
             }
         }
     }
 
-    return false;    
+    return false;
 }
 
 const req = main(currentSq, totalNumberOfMoves, moves, snakes, ladder, "");
-console.log("Final Req: " + req);
+console.log("Final Solution: " + req);
