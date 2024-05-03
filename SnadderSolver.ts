@@ -9,16 +9,11 @@ function snadderSolver(totalNumberOfMoves: number, snakes: SnakeLadder[], ladder
 
     if (nextMoveToPlay !== null) {
 
-        //Decrease number of total moves to be played
         totalNumberOfMoves--;
-        //Decrease number of remaining moves
         remainingMoves[nextMoveToPlay - 1]--;
-        //Add a string for next move played
         stepsTaken += nextMoveToPlay + " ";
-        //increase the placement received
         initialPlacement += nextMoveToPlay;
 
-        //Check and update for snakebite and ladder climb
         const snakeByte = snakes.find((value: SnakeLadder) => value.from === initialPlacement);
         if (snakeByte) initialPlacement = snakeByte.to;
 
@@ -29,19 +24,16 @@ function snadderSolver(totalNumberOfMoves: number, snakes: SnakeLadder[], ladder
     if (initialPlacement === 100) {
         return stepsTaken;
     }
-    else {
-        for (let i = 0; i < remainingMoves.length; i++) {
+    for (let i = 0; i < remainingMoves.length; i++) {
 
-            if (remainingMoves[i] !== 0) {
-                const message = snadderSolver(totalNumberOfMoves, snakes, ladders, remainingMoves, stepsTaken, initialPlacement, i + 1);
-                if (message) return message;
-            }
-
+        if (remainingMoves[i] !== 0) {
+            const message = snadderSolver(totalNumberOfMoves, snakes, ladders, remainingMoves, stepsTaken, initialPlacement, i + 1);
+            if (message) return message;
         }
     }
+
     return false;
 }
-
 
 const snadderSolverStr: boolean | string = snadderSolver(totalNumberOfMoves, snakes, ladders, moves, "", initialPlacement, null);
 

@@ -15,15 +15,10 @@ function snadderSolver(totalNumberOfMoves, snakes, ladders, moves, stepsTaken, i
         return false;
     var remainingMoves = __spreadArray([], moves, true);
     if (nextMoveToPlay !== null) {
-        //Decrease number of total moves to be played
         totalNumberOfMoves--;
-        //Decrease number of remaining moves
         remainingMoves[nextMoveToPlay - 1]--;
-        //Add a string for next move played
         stepsTaken += nextMoveToPlay + " ";
-        //increase the placement received
         initialPlacement += nextMoveToPlay;
-        //Check and update for snakebite and ladder climb
         var snakeByte = snakes.find(function (value) { return value.from === initialPlacement; });
         if (snakeByte)
             initialPlacement = snakeByte.to;

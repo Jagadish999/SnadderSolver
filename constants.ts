@@ -1,64 +1,68 @@
 import { SnakeLadder } from './types';
 
-const totalNumberOfMoves = 7;
+const totalNumberOfMoves = 10;
 
 const initialPlacement = 0;
 
-const snakes: SnakeLadder[] = [
+const snakes: Array<SnakeLadder> = [
     {
-        from: 59,
-        to: 16
+        from: 87,
+        to: 46
     },
 
     {
-        from: 71,
-        to: 28
+        from: 89,
+        to: 74
     },
 
     {
-        from: 64,
-        to: 48
+        from: 72,
+        to: 69
     },
     {
-        from: 77,
-        to: 57
+        from: 51,
+        to: 9
     },
     {
-        from: 84,
-        to: 62
+        from: 48,
+        to: 7
     },
     {
-        from: 88,
-        to: 53
+        from: 44,
+        to: 25
     },
+    {
+        from: 32,
+        to: 12
+    }
 ];
-const ladders: SnakeLadder[] = [
+const ladders: Array<SnakeLadder> = [
     {
         from: 3,
-        to: 11,
+        to: 39,
     },
     {
-        from: 22,
-        to: 32,
-    },
-    {
-        from: 43,
-        to: 82,
+        from: 21,
+        to: 56,
     },
     {
         from: 5,
-        to: 35,
+        to: 27,
     },
     {
-        from: 55,
-        to: 94,
+        from: 54,
+        to: 91,
     },
     {
-        from: 66,
-        to: 90,
+        from: 65,
+        to: 80,
+    },
+    {
+        from: 62,
+        to: 85,
     }
 ];
 
-const moves: number[] = [3, 1, 1, 4, 1, 1];
+const moves: number[] = [2, 2, 0, 1, 5, 1];
 
 export {totalNumberOfMoves, snakes, ladders, moves, initialPlacement}
